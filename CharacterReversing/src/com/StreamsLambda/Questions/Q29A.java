@@ -4,6 +4,11 @@ import java.util.Scanner;
 
 public class Q29A {
 
+	/**
+	 * Write a Java 8 program to generate the Fibonacci series.
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Scanner scanner = new Scanner(System.in);
@@ -27,11 +32,11 @@ public class Q29A {
 			series[1] = 1;
 
 		}
-		for (int i = 2; i <numVal; i++) {
-			series[i]=series[i-1]+series[i-2];
-			
+		for (int i = 2; i < numVal; i++) {
+			series[i] = series[i - 1] + series[i - 2];
+
 		}
-	//	System.out.println(series[0]);
+		// System.out.println(series[0]);
 		return series;
 	}
 }
