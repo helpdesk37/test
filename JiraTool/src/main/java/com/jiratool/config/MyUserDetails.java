@@ -24,8 +24,15 @@ public class MyUserDetails implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
 		Optional<UserLogin> byUserName = userRepository.findByUserName(username);
+		if(byUserName.isEmpty()) {
+			throw new UsernameNotFoundException("User not found");
+		}
 		UserLogin userLogin = byUserName.get();
+		userLogin.getRoles();
 		return new User(userLogin.getUserName(),userLogin.getPassword(),new ArrayList<>());
 	}
 
+	public Optional<UserLogin> getLoginUserDetails(String username) {
+		return userRepository.findByUserName(username);
+	}
 }

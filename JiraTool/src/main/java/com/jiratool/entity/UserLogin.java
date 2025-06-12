@@ -1,10 +1,15 @@
 package com.jiratool.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
 @Entity
@@ -14,11 +19,48 @@ public class UserLogin {
 	private Long id;
 	private String userName;
 	private String password;
+	/*
+	 * @ManyToOne
+	 * 
+	 * @JoinColumn(name = "role_id") private MasterRole masterRole;
+	 */
+	@ManyToMany
+	@JoinTable(
+	        name = "user_roles", 
+	        joinColumns = @JoinColumn(name = "user_id"), 
+	        inverseJoinColumns = @JoinColumn(name = "role_id")
+	    )
+	private Set<MasterRole> roles = new HashSet<>();
 	@ManyToOne
-	@JoinColumn(name = "role_id")
-	private MasterRole masterRole;
+	@JoinColumn(name="employee_id")
+	private Employee employee;
+
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public Set<MasterRole> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<MasterRole> roles) {
+		this.roles = roles;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
+	/*
+	 * public MasterRole getMasterRole() { return masterRole; }
+	 * 
+	 * public void setMasterRole(MasterRole masterRole) { this.masterRole =
+	 * masterRole; }
+	 */
+
 	private String email;
 	private Long mobile;
+
 	public String getEmail() {
 		return email;
 	}
@@ -59,5 +101,4 @@ public class UserLogin {
 		this.password = password;
 	}
 
-	
 }

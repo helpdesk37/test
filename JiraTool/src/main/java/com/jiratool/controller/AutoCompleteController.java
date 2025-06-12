@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jiratool.Service.AutoCompleteService;
+import com.jiratool.entity.Employee;
 import com.jiratool.entity.Project;
 
 @CrossOrigin(origins = "*")
@@ -22,6 +23,12 @@ public class AutoCompleteController {
 	@GetMapping("/autoComplete/projectName")
 	public ResponseEntity<?> getProjects(@RequestParam String query) {
 		List<Project> projects = autoCompleteService.getProjects(query);
+		return ResponseEntity.ok(projects);
+	}
+	
+	@GetMapping("/autoComplete/reportManager")
+	public ResponseEntity<?> getReportingManagers(@RequestParam String managerName) {
+		List<Employee> projects = autoCompleteService.getReportingManagers(managerName);
 		return ResponseEntity.ok(projects);
 	}
 }
