@@ -19,11 +19,17 @@ public class AutoCompleteService {
 	@Autowired
 	private EmployeeRepository employeeRepository;
 
-	public List<Project> getProjects(String query) {
+	/*public List<Project> getProjects(String query) {
 		return projectRepository.findByProjectNameContaining(query);
-	}
+	}*/
 	
 	public List<Employee> getReportingManagers(String managerName) {
 		return employeeRepository.findByEmployeeNameContaining(managerName);
+	}
+	
+	public List<Project> getProjects(String query) {
+
+		return projectRepository.findAll((root, cq, cb) -> cb.and(cb.like(root.get("projectName"), "%" + query + "%"),
+				cb.equal(root.get("ApprovedFlag"), 0)));
 	}
 }

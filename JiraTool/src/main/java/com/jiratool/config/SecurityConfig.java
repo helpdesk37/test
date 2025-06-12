@@ -30,6 +30,10 @@ public class SecurityConfig {
 		.authorizeHttpRequests(auth -> {
 		auth.requestMatchers("/authenticate").permitAll();
 		auth.requestMatchers("/h2-console/**").permitAll();
+		auth.requestMatchers("/swagger-ui/**").permitAll();
+		auth.requestMatchers("/v3/api-docs/**").permitAll();
+		auth.requestMatchers("/actuator/**").permitAll();
+		auth.requestMatchers("/metrics/**").permitAll();
 		auth.anyRequest().authenticated();
 		}
 		).headers(header-> header.frameOptions(frameOptions -> frameOptions.disable()))

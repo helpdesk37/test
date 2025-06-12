@@ -9,8 +9,13 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jiratool.Service.IssuesService;
 import com.jiratool.entity.Issues;
 import com.jiratool.entity.MasterIssueTypes;
@@ -23,9 +28,19 @@ public class IssuesController {
 	@Autowired
 	private IssuesService issuesService;
 	@PostMapping("/createIssue")
-	public ResponseEntity<?> createIssue(@RequestBody Issues issues) {
-		Issues issue = issuesService.createIssue(issues);
-		return ResponseEntity.status(HttpStatus.CREATED).body(issue);
+	public ResponseEntity<?> createIssue(@RequestParam("issueData") String  issueData,@RequestParam("files") MultipartFile[] files) {
+		//Issues issue = issuesService.createIssue(issues);
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			Issues value = mapper.readValue(issueData, Issues.class);
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ResponseEntity.status(HttpStatus.CREATED).body("");
 	}
 	@GetMapping("/getMasterIssueTypes")
 	public ResponseEntity<?> getMasterIssueTypes(){
