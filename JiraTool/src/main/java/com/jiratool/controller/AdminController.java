@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jiratool.Service.MasterGenderTableService;
 import com.jiratool.Service.RolePermissionService;
+import com.jiratool.entity.MasterGenderTable;
 import com.jiratool.entity.MasterRole;
 import com.jiratool.entity.Modules;
 import com.jiratool.entity.RolePermission;
@@ -23,6 +25,12 @@ public class AdminController {
 
 	@Autowired
 	private RolePermissionService rolePermissionService;
+	
+	private final MasterGenderTableService masterGenderTableService;
+	
+	public AdminController(MasterGenderTableService masterGenderTableService) {
+		this.masterGenderTableService = masterGenderTableService;
+	}
 	@PostMapping("/assign-permissons")
 	public ResponseEntity<?> assignPermissons(@RequestBody List<RolePermission> rolePermission) {
 		for (RolePermission rolePermission2 : rolePermission) {
@@ -49,4 +57,5 @@ public class AdminController {
 	public ResponseEntity<List<Screen>> getScreens(){
 		return ResponseEntity.ok(rolePermissionService.getMasterScreens());
 	}
+	
 }

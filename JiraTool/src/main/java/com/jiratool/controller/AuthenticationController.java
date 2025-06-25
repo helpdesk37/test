@@ -42,7 +42,7 @@ public class AuthenticationController {
 		final String token = jwtUtil.generateToken(userByUsername);
 		Optional<UserLogin> userLogin=myUserDetails.getLoginUserDetails(userByUsername.getUsername());
 		UserLogin userLogin2 = userLogin.get();
-		return ResponseEntity.ok().body(new UserLoginDto(token,userLogin2.getId(),userLogin2.getEmployee().getEmployeeId()));
+		return ResponseEntity.ok().body(new UserLoginDto(token,userLogin2.getId(),userLogin2.getEmployee().getEmployeeId(),userLogin2.getMasterRole().getRoleId()));
 		//return ResponseEntity.ok(null);
 	}
 	

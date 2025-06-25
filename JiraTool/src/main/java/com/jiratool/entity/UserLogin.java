@@ -19,18 +19,18 @@ public class UserLogin {
 	private Long id;
 	private String userName;
 	private String password;
+	
+	  @ManyToOne
+	  
+	  @JoinColumn(name = "role_id") private MasterRole masterRole;
+	 
 	/*
-	 * @ManyToOne
+	 * @ManyToMany
 	 * 
-	 * @JoinColumn(name = "role_id") private MasterRole masterRole;
+	 * @JoinTable( name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
+	 * inverseJoinColumns = @JoinColumn(name = "role_id") ) private Set<MasterRole>
+	 * roles = new HashSet<>();
 	 */
-	@ManyToMany
-	@JoinTable(
-	        name = "user_roles", 
-	        joinColumns = @JoinColumn(name = "user_id"), 
-	        inverseJoinColumns = @JoinColumn(name = "role_id")
-	    )
-	private Set<MasterRole> roles = new HashSet<>();
 	@ManyToOne
 	@JoinColumn(name="employee_id")
 	private Employee employee;
@@ -39,24 +39,22 @@ public class UserLogin {
 		return employee;
 	}
 
-	public Set<MasterRole> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Set<MasterRole> roles) {
-		this.roles = roles;
-	}
+	/*
+	 * public Set<MasterRole> getRoles() { return roles; }
+	 * 
+	 * public void setRoles(Set<MasterRole> roles) { this.roles = roles; }
+	 */
 
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
 
-	/*
-	 * public MasterRole getMasterRole() { return masterRole; }
-	 * 
-	 * public void setMasterRole(MasterRole masterRole) { this.masterRole =
-	 * masterRole; }
-	 */
+	
+	  public MasterRole getMasterRole() { return masterRole; }
+	  
+	  public void setMasterRole(MasterRole masterRole) { this.masterRole =
+	  masterRole; }
+	 
 
 	private String email;
 	private Long mobile;

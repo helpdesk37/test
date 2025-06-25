@@ -34,6 +34,7 @@ public class SecurityConfig {
 		auth.requestMatchers("/v3/api-docs/**").permitAll();
 		auth.requestMatchers("/actuator/**").permitAll();
 		auth.requestMatchers("/metrics/**").permitAll();
+		auth.requestMatchers("/master/**").permitAll();
 		auth.anyRequest().authenticated();
 		}
 		).headers(header-> header.frameOptions(frameOptions -> frameOptions.disable()))

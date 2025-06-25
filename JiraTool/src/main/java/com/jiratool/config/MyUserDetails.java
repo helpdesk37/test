@@ -28,7 +28,7 @@ public class MyUserDetails implements UserDetailsService {
 			throw new UsernameNotFoundException("User not found");
 		}
 		UserLogin userLogin = byUserName.get();
-		userLogin.getRoles();
+		//userLogin.getRoles();
 		return new User(userLogin.getUserName(),userLogin.getPassword(),new ArrayList<>());
 	}
 

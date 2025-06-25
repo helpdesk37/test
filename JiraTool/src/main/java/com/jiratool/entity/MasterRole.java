@@ -24,6 +24,7 @@ public Long getRoleId() {
 	}
 private String roleDescrption;
 
-@ManyToMany(mappedBy = "roles")
-private Set<UserLogin> user;
+/*
+ * @ManyToMany(mappedBy = "roles") private Set<UserLogin> user;
+ */
 }

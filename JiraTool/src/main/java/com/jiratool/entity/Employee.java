@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Employee {
@@ -13,6 +15,16 @@ public class Employee {
 	private Long employeeId;
 	private String employeeName;
 	private String employeeEmail;
+	@ManyToOne
+	@JoinColumn(name = "designation_id")
+	private MasterDesignationTable masterDesignationTable;
+	public MasterDesignationTable getMasterDesignationTable() {
+		return masterDesignationTable;
+	}
+
+	public void setMasterDesignationTable(MasterDesignationTable masterDesignationTable) {
+		this.masterDesignationTable = masterDesignationTable;
+	}
 
 	public String getEmployeeEmail() {
 		return employeeEmail;

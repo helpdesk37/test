@@ -1,5 +1,7 @@
 package com.jiratool.Service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,5 +16,9 @@ public class EmployeeService {
 
 	public Employee createEmployee(Employee employee) {
 		return employeeRepository.save(employee);
+	}
+	
+	public List<Employee> getAllEmployees() {
+		return employeeRepository.findAll();
 	}
 }
